@@ -1,0 +1,18 @@
+
+Import( 'env' )
+Import( 'vqaStatisticsLibStatic' )
+
+testStatisticsBin = env.Program(
+	'testStatistics',
+	'testStatistics.cpp',
+	LIBS = [
+		vqaStatisticsLibStatic,
+	]
+	)
+
+Depends( testStatisticsBin, vqaStatisticsLibStatic )
+
+test = Command( 'test-statistics', None, 'build/release/test/testStatistics' )
+Depends( test, testStatisticsBin )
+
+AlwaysBuild( test )

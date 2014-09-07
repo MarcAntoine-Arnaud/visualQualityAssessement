@@ -1,0 +1,19 @@
+
+Import( 'env' )
+
+vqaStatisticsLib = env.SharedLibrary(
+	'vqastatistics',
+	Glob( 'Statistics/*.cpp' ),
+	)
+
+
+vqaStatisticsLibStatic = env.StaticLibrary(
+	'vqastatistics',
+	Glob( 'Statistics/*.cpp' ),
+	)
+
+
+env.Alias( 'install', env.InstallVersionedLib( 'lib', vqaStatisticsLib ) )
+env.Alias( 'install', env.Install( 'lib', vqaStatisticsLibStatic ) )
+
+Export( 'vqaStatisticsLibStatic' )
