@@ -18,15 +18,17 @@ public:
 
 	void setPlanar( bool planar = true ){ _planar = planar; }
 
-	void process( std::vector<unsigned char>& data );
+	void process( const std::vector<unsigned char>& data );
+	void process( const std::vector<unsigned short>& data );
+	void process( const std::vector<unsigned int>& data );
 
-	std::vector<unsigned char> getMin(){ return _min; }
-	std::vector<unsigned char> getMax(){ return _max; }
+	std::vector<size_t> getMin(){ return _min; }
+	std::vector<size_t> getMax(){ return _max; }
 
 private:
 
-	std::vector<unsigned char> _max;
-	std::vector<unsigned char> _min;
+	std::vector<size_t> _max;
+	std::vector<size_t> _min;
 
 	size_t _channels;
 	bool _planar;

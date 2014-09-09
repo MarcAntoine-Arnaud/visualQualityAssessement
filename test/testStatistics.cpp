@@ -3,27 +3,56 @@
 
 #include <cassert>
 #include <iostream>
+#include <limits>
+
+template< typename PixelType >
+void testMin()
+{
+	Statistics s;
+	std::vector<PixelType> data_0( 16, 0 );
+	s.process( data_0 );
+	assert( s.getMin().at(0) == 0 );
+	
+	std::vector<PixelType> data_max( 16, std::numeric_limits<PixelType>::max() );
+	s.process( data_max );
+	assert( s.getMin().at(0) == std::numeric_limits<PixelType>::max() );
+
+	std::vector<PixelType> data_mix( 16, 0 );
+	data_mix.at( data_mix.size() - 1 ) = std::numeric_limits<PixelType>::max();
+	s.process( data_mix );
+	assert( s.getMin().at(0) == 0 );
+}
+
+template< typename PixelType >
+void testMax()
+{
+	Statistics s;
+	std::vector<PixelType> data_0( 16, 0 );
+	s.process( data_0 );
+	assert( s.getMax().at(0) == 0 );
+	
+	std::vector<PixelType> data_max( 16, std::numeric_limits<PixelType>::max() );
+	s.process( data_max );
+	assert( s.getMax().at(0) == std::numeric_limits<PixelType>::max() );
+
+	std::vector<PixelType> data_mix( 16, 0 );
+	data_mix.at( data_mix.size() - 1 ) = std::numeric_limits<PixelType>::max();
+	s.process( data_mix );
+	assert( s.getMax().at(0) == std::numeric_limits<PixelType>::max() );
+}
 
 int main( int argc, char** argv )
 {
 	std::cout << "-> run tests" << std::endl;
 
-	Statistics s;
+	testMin<unsigned char>();
+	testMin<unsigned short>();
+	testMin<unsigned int>();
 
-	std::vector<unsigned char> data0( 256, 0 );
-	s.process( data0 );
-	assert( s.getMin().at(0) == 0 );
-	assert( s.getMax().at(0) == 0 );
-	
-	std::vector<unsigned char> data255( 256, 255 );
-	s.process( data255 );
-	assert( s.getMin().at(0) == 255 );
-	assert( s.getMax().at(0) == 255 );
+	testMax<unsigned char>();
+	testMax<unsigned short>();
+	testMax<unsigned int>();
 
-	std::vector<unsigned char> dataMix( 256, 0 );
-	dataMix.at( dataMix.size() - 1 ) = 255;
-	s.process( dataMix );
-	assert( s.getMin().at(0) == 0 );
-	assert( s.getMax().at(0) == 255 );
+
 	std::cout << "-> tests passed" << std::endl;
 }

@@ -3,17 +3,33 @@
 #include <algorithm>
 #include <limits>
 
-void Statistics::process( std::vector<unsigned char>& data )
+template< typename PixelType >
+void processMinMax( const std::vector<PixelType>& data, const size_t channels, std::vector<size_t>& min, std::vector<size_t>& max )
 {
-	_min.clear();
-	_max.clear();
+	min.clear();
+	max.clear();
 
-	_min.resize( _channels, std::numeric_limits<unsigned char>::max() );
-	_max.resize( _channels, std::numeric_limits<unsigned char>::min() );
+	min.resize( channels, std::numeric_limits<size_t>::max() );
+	max.resize( channels, std::numeric_limits<size_t>::min() );
 
 	for( auto sample : data )
 	{
-		_min.at( 0 ) = std::min( sample, _min.at( 0 ) );
-		_max.at( 0 ) = std::max( sample, _max.at( 0 ) );
+		min.at( 0 ) = std::min( (size_t)sample, min.at( 0 ) );
+		max.at( 0 ) = std::max( (size_t)sample, max.at( 0 ) );
 	}
+}
+
+void Statistics::process( const std::vector<unsigned char>& data )
+{
+	processMinMax( data, _channels, _min, _max );
+}
+
+void Statistics::process( const std::vector<unsigned short>& data )
+{
+	processMinMax( data, _channels, _min, _max );
+}
+
+void Statistics::process( const std::vector<unsigned int>& data )
+{
+	processMinMax( data, _channels, _min, _max );
 }
