@@ -3,13 +3,13 @@ Import( 'env' )
 
 vqaStatisticsLib = env.SharedLibrary(
 	'vqastatistics',
-	Glob( 'Statistics/*.cpp' ),
+	Glob( '*/*.cpp' ),
 	)
 
 
 vqaStatisticsLibStatic = env.StaticLibrary(
 	'vqastatistics',
-	Glob( 'Statistics/*.cpp' ),
+	Glob( '*/*.cpp' ),
 	)
 
 

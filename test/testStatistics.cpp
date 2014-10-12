@@ -1,5 +1,5 @@
 
-#include <Statistics/Statistics.hpp>
+#include <statistics/Statistics.hpp>
 
 #include <cassert>
 #include <iostream>

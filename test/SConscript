@@ -8,11 +8,37 @@ testStatisticsBin = env.Program(
 	LIBS = [
 		vqaStatisticsLibStatic,
 	]
-	)
+)
+
+testMseBin = env.Program(
+	'testMse',
+	'fullReference/testMse.cpp',
+	LIBS = [
+		vqaStatisticsLibStatic,
+	]
+)
+
+testPsnrBin = env.Program(
+	'testPsnr',
+	'fullReference/testPsnr.cpp',
+	LIBS = [
+		vqaStatisticsLibStatic,
+	]
+)
+
 
 Depends( testStatisticsBin, vqaStatisticsLibStatic )
+Depends( testMseBin, vqaStatisticsLibStatic )
+Depends( testPsnrBin, vqaStatisticsLibStatic )
 
-test = Command( 'test-statistics', None, 'build/release/test/testStatistics' )
-Depends( test, testStatisticsBin )
+testStatistics = Command( 'test-statistics', None, 'build/release/test/testStatistics' )
+Depends( testStatistics, testStatisticsBin )
+AlwaysBuild( testStatistics )
 
-AlwaysBuild( test )
+testMse = Command( 'test-mse', None, 'build/release/test/testMse' )
+Depends( testMse, testMseBin )
+AlwaysBuild( testMse )
+
+testPsnr = Command( 'test-psnr', None, 'build/release/test/testPsnr' )
+Depends( testPsnr, testPsnrBin )
+AlwaysBuild( testPsnr )
