@@ -14,10 +14,6 @@ void processMinMax( const std::vector<PixelType>& data, const size_t channels, s
 	PixelType minimum{ std::numeric_limits<PixelType>::max() };
 	PixelType maximum{ std::numeric_limits<PixelType>::min() };
 
-	// std::cout << "min: " << maximum << std::endl;
-	// std::cout << "data[0]: " << data[0] << std::endl;
-
-
 	min.resize( channels, maximum );
 	max.resize( channels, minimum );
 
@@ -28,8 +24,12 @@ void processMinMax( const std::vector<PixelType>& data, const size_t channels, s
 	}
 	min.at( 0 ) = minimum;
 	max.at( 0 ) = maximum;
-	// std::cout << "min: " << minimum << std::endl;
-	// std::cout << "max: " << maximum << std::endl;
+}
+
+Statistics::Statistics()
+	: _channels( 1 )
+	, _planar( false )
+{
 }
 
 void Statistics::process( const std::vector<char>& data )

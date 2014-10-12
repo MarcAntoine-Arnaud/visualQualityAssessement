@@ -8,14 +8,9 @@ class Statistics
 {
 
 public:
-	Statistics()
-		: _channels( 1 )
-		, _planar( false )
-	{
-	}
+	Statistics();
 
 	void setChannels( size_t channels ){ _channels = channels; }
-
 	void setPlanar( bool planar = true ){ _planar = planar; }
 
 	void process( const std::vector<char>& data );
