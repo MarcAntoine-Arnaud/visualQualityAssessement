@@ -19,7 +19,7 @@ template< typename PixelType, size_t DataSize1, PixelType PixelValue1, size_t Da
 Statistics& testSetAndProcessData( Statistics& s )
 {
 	std::vector<PixelType> data( DataSize1 + DataSize2, PixelValue2 );
-	memset( &data[0], PixelValue1, DataSize1 );
+	std::fill( data.begin(), data.begin() + DataSize1, PixelValue1 );
 	s.process( data );
 	return s;
 }
@@ -37,9 +37,6 @@ void testMin()
 	assert( (PixelType) ( testSetAndProcessData< PixelType, dataSize, pixelBlack >( s ).getMin().at(0) ) == pixelBlack );
 	assert( (PixelType) ( testSetAndProcessData< PixelType, dataSize, pixelMin >( s ).getMin().at(0) ) == pixelMin );
 	assert( (PixelType) ( testSetAndProcessData< PixelType, dataSize, pixelMax >( s ).getMin().at(0) ) == pixelMax );
-
-	std::cout << (PixelType) ( testSetAndProcessData< PixelType, dataSize, pixelMin, dataSize, pixelMax >( s ).getMin().at(0) ) << " ^^ " << pixelMin << std::endl;
-	std::cout << ( testSetAndProcessData< PixelType, dataSize, pixelMin, dataSize, pixelMax >( s ).getMin().at(0) ) << " ^^ " << pixelMin << std::endl;
 
 	assert( (PixelType) ( testSetAndProcessData< PixelType, dataSize, pixelMin, dataSize, pixelMax >( s ).getMin().at(0) ) == pixelMin );
 	assert( (PixelType) ( testSetAndProcessData< PixelType, dataSize, pixelMax, dataSize, pixelMin >( s ).getMin().at(0) ) == pixelMin );
@@ -75,8 +72,8 @@ int main( int argc, char** argv )
 	std::cout << "-> run tests" << std::endl;
 
 	testMin<char>();
-	// testMin<short>();
-	// testMin<int>();
+	testMin<short>();
+	testMin<int>();
 
 	testMin<unsigned char>();
 	testMin<unsigned short>();
@@ -85,7 +82,6 @@ int main( int argc, char** argv )
 	testMax<unsigned char>();
 	testMax<unsigned short>();
 	testMax<unsigned int>();
-
 
 	std::cout << "-> tests passed" << std::endl;
 }

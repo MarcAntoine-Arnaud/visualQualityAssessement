@@ -14,6 +14,10 @@ void processMinMax( const std::vector<PixelType>& data, const size_t channels, s
 	PixelType minimum{ std::numeric_limits<PixelType>::max() };
 	PixelType maximum{ std::numeric_limits<PixelType>::min() };
 
+	// std::cout << "min: " << maximum << std::endl;
+	// std::cout << "data[0]: " << data[0] << std::endl;
+
+
 	min.resize( channels, maximum );
 	max.resize( channels, minimum );
 
@@ -24,36 +28,36 @@ void processMinMax( const std::vector<PixelType>& data, const size_t channels, s
 	}
 	min.at( 0 ) = minimum;
 	max.at( 0 ) = maximum;
-	std::cout << "min: " << minimum << std::endl;
-	std::cout << "max: " << maximum << std::endl;
+	// std::cout << "min: " << minimum << std::endl;
+	// std::cout << "max: " << maximum << std::endl;
 }
 
 void Statistics::process( const std::vector<char>& data )
 {
-	processMinMax( data, _channels, _min, _max );
+	processMinMax<char>( data, _channels, _min, _max );
 }
 
 void Statistics::process( const std::vector<short>& data )
 {
-	processMinMax( data, _channels, _min, _max );
+	processMinMax<short>( data, _channels, _min, _max );
 }
 
 void Statistics::process( const std::vector<int>& data )
 {
-	processMinMax( data, _channels, _min, _max );
+	processMinMax<int>( data, _channels, _min, _max );
 }
 
 void Statistics::process( const std::vector<unsigned char>& data )
 {
-	processMinMax( data, _channels, _min, _max );
+	processMinMax<unsigned char>( data, _channels, _min, _max );
 }
 
 void Statistics::process( const std::vector<unsigned short>& data )
 {
-	processMinMax( data, _channels, _min, _max );
+	processMinMax<unsigned short>( data, _channels, _min, _max );
 }
 
 void Statistics::process( const std::vector<unsigned int>& data )
 {
-	processMinMax( data, _channels, _min, _max );
+	processMinMax<unsigned int>( data, _channels, _min, _max );
 }
