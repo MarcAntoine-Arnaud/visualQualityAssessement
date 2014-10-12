@@ -18,6 +18,9 @@ public:
 
 	void setPlanar( bool planar = true ){ _planar = planar; }
 
+	void process( const std::vector<char>& data );
+	void process( const std::vector<short>& data );
+	void process( const std::vector<int>& data );
 	void process( const std::vector<unsigned char>& data );
 	void process( const std::vector<unsigned short>& data );
 	void process( const std::vector<unsigned int>& data );
